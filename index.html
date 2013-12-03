@@ -1,0 +1,22 @@
+<html>
+<head>
+<script type="text/javascript"
+  src="dygraph-combined.js"></script>
+</head>
+<body style='font-family: Helvetica, sans-serif;padding:20px;'>
+<h2>U.S. Weather Risk Index</h2>
+<div id="graphdiv2"
+  style="width:750px; height:450px;"></div>
+<script type="text/javascript">
+  g2 = new Dygraph(
+        document.getElementById("graphdiv2"),
+            "usa_gdp_risk.csv", // path to CSV file
+                {}          // options
+                  );
+</script>
+<p>You can mouse over to highlight individual values, click and drag to zoom, double-click to zoom back out, shift-drag to pan.</p>
+<p><a href='http://riskpulse.com/innovations/introducing-u-s-risk-index/'>What is this?</a></p>
+<p>Powered by <a href='http://riskpulse.com' target="_blank">Riskpulse</a></p>
+
+</body>
+</html>
