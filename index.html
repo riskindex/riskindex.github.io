@@ -2,31 +2,36 @@
 <head>
 <script type="text/javascript"
   src="dygraph-combined.js"></script>
+</head>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-46217610-1', 'usriskindex.com');
-  ga('send', 'pageview');
+            ga('create', 'UA-46217610-1', 'usriskindex.com');
+              ga('send', 'pageview');
 
 </script>
-</head>
 <body style='font-family: Helvetica, sans-serif;padding:20px;'>
+<h3>Current risk score: <span id='curscore'></span></h3>
 <div id="graphdiv2"
   style="width:750px; height:450px;"></div>
 <script type="text/javascript">
   g2 = new Dygraph(
         document.getElementById("graphdiv2"),
-            "usa_gdp_risk.csv", // path to CSV file
+            "usa_gdp_risk.csv", 
              {
                 showRangeSelector: true,
                 title: 'U.S. Weather Risk index, weighted by GDP',
                 xlabel: 'Date',
                 ylabel: 'Risk Score',
-             }          // options
+                drawCallback: function(g2) {
+                  document.getElementById('curscore').innerHTML = (g2.rawData_[g2.rawData_.length - 1][1]).toFixed(2);
+                }
+             }
         );
+
 </script>
 <p>You can mouse over to highlight individual values, click and drag to zoom, double-click to zoom back out, shift-drag to pan.</p>
 <p><a href='http://riskpulse.com/innovations/introducing-u-s-risk-index/'>What is this?</a></p>
