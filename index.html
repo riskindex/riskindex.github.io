@@ -4,6 +4,14 @@
   src="dygraph-combined.js"></script>
 </head>
 <script type="text/javascript">
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<body style='font-family: Helvetica, sans-serif;padding:20px;'>
+<script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-46190768-1']);
@@ -27,7 +35,7 @@
             "usa_gdp_risk.csv", 
              {
                 showRangeSelector: true,
-                title: 'U.S. Weather Risk index, weighted by GDP',
+                title: 'U.S. Economic Weather Risk Index',
                 xlabel: 'Date',
                 ylabel: 'Risk Score',
                 drawCallback: function(g2) {
@@ -41,11 +49,36 @@
                 }
              }
         );
-
 </script>
 <p>You can mouse over to highlight individual values, zoom using the range selector, and shift-drag to pan.</p>
 <p><a href='http://riskpulse.com/innovations/introducing-u-s-risk-index/'>What is this?</a></p>
 <p><a href='http://news.stormpulse.com/post/67480146095/diagram-how-last-weekends-severe-weather-in-the'>How severe weather in the Midwest impacted the risk index.</a></p>
+<hr/>
+<h3>Current risk score: <span id='curscore-airport'></span></h3>
+<h4>Change in last 24 hours: <span id='change24-airport'></span></h4>
+<div id='graphdiv3' style='width:750px; height:450px;'></div>
+<script type="text/javascript">
+  g3 = new Dygraph(
+        document.getElementById("graphdiv3"),
+            "commercial_airports_risk.csv", 
+             {
+                showRangeSelector: true,
+                title: 'U.S. Commercial Air Traffic Risk Index',
+                xlabel: 'Date',
+                ylabel: 'Risk Score',
+                drawCallback: function(g3) {
+                  var idx = g3.rawData_.length - 1;
+                  var recent = g3.rawData_[idx][1];
+                  //var yesterday = g3.rawData_[idx - 144][1];
+                  //var change = Math.round((recent - yesterday) / yesterday * 100); 
+                  //var op = (change > 0 ? '+ ' : ''); 
+                  document.getElementById('curscore-airport').innerHTML = recent.toFixed(2);
+                  //document.getElementById('change24-airport').innerHTML = op + change + '%';
+                }
+             }
+        );
+</script>
+
 <p>Powered by <a href='http://riskpulse.com' target="_blank">Riskpulse</a></p>
 
 </body>
