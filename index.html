@@ -78,7 +78,45 @@
              }
         );
 </script>
+<div style="width:750px;">
+  <p>
+    This index reflects the weather risk of all major airports in the United States. The contribution
+    of each airport to the total number of passengers boarding in the United States is taken into consideration. For example, a hypothetical
+    ice storm at Chicago O'Hare would have a greater impact on this risk score than an ice storm at the Memphis International airport.
+  </p>
+</div>
 
+<hr/>
+<h3>Current risk score: <span id='curscore-walmart'></span></h3>
+<h4>Change in last 24 hours: <span id='change24-walmart'></span></h4>
+<div id='walmart' style='width:750px; height:450px;'></div>
+<script type="text/javascript">
+  g3 = new Dygraph(
+        document.getElementById("walmart"),
+            "walmart_risk.csv", 
+             {
+                showRangeSelector: true,
+                title: 'Walmart Retail Stores Weather Risk Index',
+                xlabel: 'Date',
+                ylabel: 'Risk Score',
+                drawCallback: function(g3) {
+                  var idx = g3.rawData_.length - 1;
+                  var recent = g3.rawData_[idx][1];
+                  var yesterday = g3.rawData_[idx - 144][1];
+                  var change = Math.round((recent - yesterday) / yesterday * 100); 
+                  var op = (change > 0 ? '+ ' : ''); 
+                  document.getElementById('curscore-walmart').innerHTML = recent.toFixed(2);
+                  document.getElementById('change24-walmart').innerHTML = op + change + '%';
+                }
+             }
+        );
+</script>   
+<div style="width:750px;">
+  <p>
+    The Walmart Retail Stores Weather Risk Index depicts the amount of weather risk that Walmart's retail stores 
+  in the United States are exposed to at any given time. All stores are treated equally. 
+  </p>
+</div>
 <p>Powered by <a href='http://riskpulse.com' target="_blank">Riskpulse</a></p>
 
 </body>
