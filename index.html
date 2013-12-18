@@ -2,6 +2,10 @@
 <head>
 <script type="text/javascript"
   src="dygraph-combined.js"></script>
+<style type="text/css">
+  ul {list-style-type: none;display: inline; padding:0px; margin:0px;}
+  li {display: inline; padding-right:10px; margin: 0px}
+</style>
 </head>
 <script type="text/javascript">
   (function() {
@@ -25,17 +29,34 @@
 
 </script>
 <body style='font-family: Helvetica, sans-serif;padding:20px;'>
+  <p>Powered by <a href='http://riskpulse.com' target="_blank">Riskpulse</a></p>
+  <span><ul><li><a href='#gdp'>GDP</a></li><li><a href='#commercial-airport'>Commercial Airports</a></li><li><a href='#walmart'>Walmart</a></li></ul></span>
+  <div id="risks" style="padding-top:10px;width:750px;height:450px;"></div>
+  <script type="text/javascript">
+    g1 = new Dygraph(
+          document.getElementById("risks"),
+              "all_risk.csv", 
+               {
+                  showRangeSelector: true,
+                  hideOverlayOnMouseOut: false,
+                  title: 'Weather Risk Indexes',
+                  xlabel: 'Date',
+                  ylabel: 'Risk Score'
+               }
+          );
+  </script>
+<br/>
+<hr/>
 <h3>Current risk score: <span id='curscore'></span></h3>
 <h4>Change in last 24 hours: <span id='change24'></span></h4>
-<div id="graphdiv2"
-  style="width:750px; height:450px;"></div>
+<div id="gdp" style="width:750px; height:450px;"></div>
 <script type="text/javascript">
   g2 = new Dygraph(
-        document.getElementById("graphdiv2"),
+        document.getElementById("gdp"),
             "usa_gdp_risk.csv", 
              {
                 showRangeSelector: true,
-                title: 'U.S. Economic Weather Risk Index',
+                title: 'U.S. GDP Weighted Weather Risk Index',
                 xlabel: 'Date',
                 ylabel: 'Risk Score',
                 drawCallback: function(g2) {
@@ -56,10 +77,10 @@
 <hr/>
 <h3>Current risk score: <span id='curscore-airport'></span></h3>
 <h4>Change in last 24 hours: <span id='change24-airport'></span></h4>
-<div id='graphdiv3' style='width:750px; height:450px;'></div>
+<div id='commercial-airport' style='width:750px; height:450px;'></div>
 <script type="text/javascript">
   g3 = new Dygraph(
-        document.getElementById("graphdiv3"),
+        document.getElementById("commercial-airport"),
             "commercial_airports_risk.csv", 
              {
                 showRangeSelector: true,
@@ -117,7 +138,5 @@
   in the United States are exposed to at any given time. All stores are treated equally. 
   </p>
 </div>
-<p>Powered by <a href='http://riskpulse.com' target="_blank">Riskpulse</a></p>
-
 </body>
 </html>
