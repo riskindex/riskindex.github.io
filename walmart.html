@@ -1,0 +1,55 @@
+<html>
+<head>
+<script type="text/javascript"
+  src="dygraph-combined.js"></script>
+<style type="text/css">
+  ul {list-style-type: none;display: inline; padding:0px; margin:0px;}
+  li {display: inline; padding-right:10px; margin: 0px}
+</style>
+</head>
+<body style='font-family: Helvetica, sans-serif;padding:20px;'>
+<h3>Walmart's current risk score: <span id='curscore-walmart'></span></h3>
+<h4>Change in last 24 hours: <span id='change24-walmart'></span></h4>
+<div id='walmart' style='width:750px; height:450px;'></div>
+<script type="text/javascript">
+  g3 = new Dygraph(
+        document.getElementById("walmart"),
+            "walmart_risk.csv", 
+             {
+                showRangeSelector: true,
+                title: 'Walmart Retail Stores Weather Risk Index',
+                xlabel: 'Date',
+                ylabel: 'Risk Score',
+                drawCallback: function(g3) {
+                  var idx = g3.rawData_.length - 1;
+                  var recent = g3.rawData_[idx][1];
+                  var yesterday = g3.rawData_[idx - 24][1];
+                  var change = Math.round((recent - yesterday) / yesterday * 100); 
+                  var op = (change > 0 ? '+ ' : ''); 
+                  document.getElementById('curscore-walmart').innerHTML = recent.toFixed(2);
+                  document.getElementById('change24-walmart').innerHTML = op + change + '%';
+                }
+             }
+        );
+</script>   
+<div style="width:750px;">
+  <p>
+    The Walmart Retail Stores Weather Risk Index depicts the amount of weather risk that Walmart's retail stores 
+  in the United States are exposed to at any given time. All stores are treated equally. 
+  </p>
+</div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-46190768-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

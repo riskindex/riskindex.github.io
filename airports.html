@@ -1,0 +1,56 @@
+<html>
+<head>
+<script type="text/javascript"
+  src="dygraph-combined.js"></script>
+<style type="text/css">
+  ul {list-style-type: none;display: inline; padding:0px; margin:0px;}
+  li {display: inline; padding-right:10px; margin: 0px}
+</style>
+</head>
+<body style='font-family: Helvetica, sans-serif;padding:20px;'>
+<h3>US Commercial Airport current aggregate risk score: <span id='curscore-airport'></span></h3>
+<h4>Change in last 24 hours: <span id='change24-airport'></span></h4>
+<div id='commercial-airport' style='width:750px; height:450px;'></div>
+<script type="text/javascript">
+  g3 = new Dygraph(
+        document.getElementById("commercial-airport"),
+            "commercial_airports_risk.csv", 
+             {
+                showRangeSelector: true,
+                title: 'U.S. Commercial Air Traffic Weather Risk Index',
+                xlabel: 'Date',
+                ylabel: 'Risk Score',
+                drawCallback: function(g3) {
+                  var idx = g3.rawData_.length - 1;
+                  var recent = g3.rawData_[idx][1];
+                  var yesterday = g3.rawData_[idx - 144][1];
+                  var change = Math.round((recent - yesterday) / yesterday * 100); 
+                  var op = (change > 0 ? '+ ' : ''); 
+                  document.getElementById('curscore-airport').innerHTML = recent.toFixed(2);
+                  document.getElementById('change24-airport').innerHTML = op + change + '%';
+                }
+             }
+        );
+</script>
+<div style="width:750px;">
+  <p>
+    This index reflects the weather risk of all major airports in the United States. The contribution
+    of each airport to the total number of passengers boarding in the United States is taken into consideration. For example, a hypothetical
+    ice storm at Chicago O'Hare would have a greater impact on this risk score than an ice storm at the Memphis International airport.
+  </p>
+</div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-46190768-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
