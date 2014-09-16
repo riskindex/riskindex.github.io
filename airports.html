@@ -23,7 +23,7 @@
                 drawCallback: function(g3) {
                   var idx = g3.rawData_.length - 1;
                   var recent = g3.rawData_[idx][1];
-                  var yesterday = g3.rawData_[idx - 144][1];
+                  var yesterday = g3.rawData_[idx - 24][1];
                   var change = Math.round((recent - yesterday) / yesterday * 100); 
                   var op = (change > 0 ? '+ ' : ''); 
                   document.getElementById('curscore-airport').innerHTML = recent.toFixed(2);

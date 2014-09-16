@@ -7,46 +7,8 @@
   li {display: inline; padding-right:10px; margin: 0px}
 </style>
 </head>
-<script type="text/javascript">
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 <body style='font-family: Helvetica, sans-serif;padding:20px;'>
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-46190768-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-<body style='font-family: Helvetica, sans-serif;padding:20px;'>
-  <p>Powered by <a href='http://riskpulse.com' target="_blank">Riskpulse</a></p>
-  <span><ul><li><a href='#gdp'>GDP</a></li><li><a href='#commercial-airport'>Commercial Airports</a></li><li><a href='#walmart'>Walmart</a></li></ul></span>
-  <div id="risks" style="padding-top:10px;width:750px;height:450px;"></div>
-  <script type="text/javascript">
-    g1 = new Dygraph(
-          document.getElementById("risks"),
-              "all_risk.csv", 
-               {
-                  showRangeSelector: true,
-                  hideOverlayOnMouseOut: false,
-                  title: 'Weather Risk Indexes',
-                  xlabel: 'Date',
-                  ylabel: 'Risk Score'
-               }
-          );
-  </script>
-<br/>
-<hr/>
+<p>Powered by <a href='http://riskpulse.com' target="_blank">Riskpulse</a></p>
 <h3>Current risk score: <span id='curscore'></span></h3>
 <h4>Change in last 24 hours: <span id='change24'></span></h4>
 <div id="gdp" style="width:750px; height:450px;"></div>
@@ -62,7 +24,7 @@
                 drawCallback: function(g2) {
                   var idx = g2.rawData_.length - 1;
                   var recent = g2.rawData_[idx][1];
-                  var yesterday = g2.rawData_[idx - 144][1];
+                  var yesterday = g2.rawData_[idx - 24][1];
                   var change = Math.round((recent - yesterday) / yesterday * 100); 
                   var op = (change > 0 ? '+ ' : ''); 
                   document.getElementById('curscore').innerHTML = recent.toFixed(2);
@@ -74,69 +36,17 @@
 <p>You can mouse over to highlight individual values, zoom using the range selector, and shift-drag to pan.</p>
 <p><a href='http://riskpulse.com/innovations/introducing-u-s-risk-index/'>What is this?</a></p>
 <p><a href='http://news.stormpulse.com/post/67480146095/diagram-how-last-weekends-severe-weather-in-the'>How severe weather in the Midwest impacted the risk index.</a></p>
-<hr/>
-<h3>Current risk score: <span id='curscore-airport'></span></h3>
-<h4>Change in last 24 hours: <span id='change24-airport'></span></h4>
-<div id='commercial-airport' style='width:750px; height:450px;'></div>
 <script type="text/javascript">
-  g3 = new Dygraph(
-        document.getElementById("commercial-airport"),
-            "commercial_airports_risk.csv", 
-             {
-                showRangeSelector: true,
-                title: 'U.S. Commercial Air Traffic Weather Risk Index',
-                xlabel: 'Date',
-                ylabel: 'Risk Score',
-                drawCallback: function(g3) {
-                  var idx = g3.rawData_.length - 1;
-                  var recent = g3.rawData_[idx][1];
-                  var yesterday = g3.rawData_[idx - 144][1];
-                  var change = Math.round((recent - yesterday) / yesterday * 100); 
-                  var op = (change > 0 ? '+ ' : ''); 
-                  document.getElementById('curscore-airport').innerHTML = recent.toFixed(2);
-                  document.getElementById('change24-airport').innerHTML = op + change + '%';
-                }
-             }
-        );
-</script>
-<div style="width:750px;">
-  <p>
-    This index reflects the weather risk of all major airports in the United States. The contribution
-    of each airport to the total number of passengers boarding in the United States is taken into consideration. For example, a hypothetical
-    ice storm at Chicago O'Hare would have a greater impact on this risk score than an ice storm at the Memphis International airport.
-  </p>
-</div>
 
-<hr/>
-<h3>Current risk score: <span id='curscore-walmart'></span></h3>
-<h4>Change in last 24 hours: <span id='change24-walmart'></span></h4>
-<div id='walmart' style='width:750px; height:450px;'></div>
-<script type="text/javascript">
-  g3 = new Dygraph(
-        document.getElementById("walmart"),
-            "walmart_risk.csv", 
-             {
-                showRangeSelector: true,
-                title: 'Walmart Retail Stores Weather Risk Index',
-                xlabel: 'Date',
-                ylabel: 'Risk Score',
-                drawCallback: function(g3) {
-                  var idx = g3.rawData_.length - 1;
-                  var recent = g3.rawData_[idx][1];
-                  var yesterday = g3.rawData_[idx - 144][1];
-                  var change = Math.round((recent - yesterday) / yesterday * 100); 
-                  var op = (change > 0 ? '+ ' : ''); 
-                  document.getElementById('curscore-walmart').innerHTML = recent.toFixed(2);
-                  document.getElementById('change24-walmart').innerHTML = op + change + '%';
-                }
-             }
-        );
-</script>   
-<div style="width:750px;">
-  <p>
-    The Walmart Retail Stores Weather Risk Index depicts the amount of weather risk that Walmart's retail stores 
-  in the United States are exposed to at any given time. All stores are treated equally. 
-  </p>
-</div>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-46190768-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
 </body>
 </html>
